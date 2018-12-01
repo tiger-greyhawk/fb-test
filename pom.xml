@@ -37,7 +37,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 			<layout>default</layout>
-			<url>${project.baseUri}src/main/java</url>
+			<url>${project.baseUri}src/main/java/sdljava</url>
 		</repository>
 	</repositories>
 

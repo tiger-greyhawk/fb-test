@@ -13,6 +13,11 @@ public class FbTestApplication {
 
 	public static void main(String[] args) {
 		System.setProperty("java.library.path", "c:\\_src\\_java\\fb-test\\src\\main\\sdljava\\lib");
+		// -Djava.library.path=c:\_src\_java\fb-test\src\main\sdljava\lib
+		System.loadLibrary("SDL");
+		System.loadLibrary("SDL_image");
+		System.loadLibrary("SDLJava");
+		System.loadLibrary("SDLJava_image");
 
 		try {
 			//SDLMain.getSDLVersion();
