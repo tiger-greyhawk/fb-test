@@ -10,7 +10,6 @@ public class DisplayableSurface
 {
     private final int screenWidth;
     private final int screenHeight;
-    private SDLRect startCoordinates;
 
     public DisplayableSurface(int screenWidth, int screenHeight)
     {
@@ -41,20 +40,13 @@ public class DisplayableSurface
 
     public SDLRect getStartCoordinates(SDLSurface image)
     {
-        setStartCoordinates(image);
-        return startCoordinates;
-    }
-
-    private void setStartCoordinates(SDLSurface image)
-    {
         int x = 0;
         int y = 0;
         if (image.getHeight() == screenHeight)
             x = (screenWidth - image.getWidth()) / 2;
         else if (image.getWidth() == screenWidth)
             y = (screenHeight - image.getHeight()) / 2;
-        //log.info("from getCoor "+image.getWidth() + " - " + image.getHeight());
-        startCoordinates = new SDLRect(x,y);
-        //return new int[]{x,y};
+        return new SDLRect(x,y);
     }
+
 }
