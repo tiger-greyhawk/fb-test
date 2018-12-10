@@ -26,7 +26,8 @@ public class DisplayableSurface
 
     public SDLSurface getPreparedImage(SDLSurface image) throws SDLException
     {
-        return SDLGfx.rotozoomSurface(image, 0, getZoom(image), false);
+        //return SDLGfx.rotozoomSurface(image, 0, getZoom(image), false);
+        return image;
     }
 
     private double getZoom(SDLSurface image)

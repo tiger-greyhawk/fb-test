@@ -22,33 +22,44 @@ import java.io.IOException;
 public class FbTestApplication {
 
 	//protected static SDLSurface screen;
-	private static int screenWidth = 1024;
-	private static int screenHeight = 768;
+	private static int screenWidth = 640;
+	private static int screenHeight = 480;
 
 	public static void main(String[] args) {
-		SpringApplication.run(FbTestApplication.class, args);
+		//SpringApplication.run(FbTestApplication.class, args);
 		//System.setProperty("java.library.path", "c:\\_src\\_java\\fb-test\\src\\main\\sdljava\\lib");
-		System.setProperty("java.library.path", "/home/kovalchuk/presentation/sdljava_linux/lib");
+		System.loadLibrary("SDL");
+		System.loadLibrary("SDL_image");
+		System.loadLibrary("SDLJava");
+		System.loadLibrary("SDLJava_image");
+		//System.loadLibrary("SDLJava_gfx");
+		//System.setProperty("java.library.path", "/home/kovalchuk/presentation/sdljava_linux/lib");
 		DisplayableSurface displayableSurface = new DisplayableSurface(screenWidth, screenHeight);
 		// -Djava.library.path=c:\_src\_java\fb-test\src\main\sdljava\lib
 		try {
 			SDLMain.init(SDLMain.SDL_INIT_VIDEO);
             log.info("init video done");
 
+
+
+
             SDLSurface screen = SDLVideo.setVideoMode(screenWidth,screenHeight, 24, SDLVideo.SDL_SWSURFACE);
 
             log.info("init screen done");
 			for (int i = 0; i<30; i++)
 			{
-				screen.fillRect(3655L);
+				screen.fillRect(0L);
                 log.info("clear screen done");
-				SDLSurface original2 = SDLImage.load("/home/kovalchuk/presentation/ball.bmp");
+				//SDLSurface original2 = SDLImage.load("/home/kovalchuk/presentation/ball.bmp");
+				SDLSurface original2 = SDLImage.load("./src/main/resources/ball.bmp");
                 log.info("image load done");
-				SDLSurface original3 = SDLImage.load("/home/kovalchuk/presentation/5.png");
+				//SDLSurface original3 = SDLImage.load("/home/kovalchuk/presentation/5.png");
+				SDLSurface original3 = SDLImage.load("./src/main/resources/ava.png");
 				SDLSurface image2 = displayableSurface.getPreparedImage(original2);
                 log.info("zoom done");
 				SDLSurface image3 = displayableSurface.getPreparedImage(original3);
-				if (image2.blitSurface(screen, displayableSurface.getStartCoordinates(image2)) == -1)
+				if (image2.blitSurface(screen) == -1)
+				//if (image2.blitSurface(screen, displayableSurface.getStartCoordinates(image2)) == -1)
 					log.warning("Blit did now work");
 				screen.flip();
 				//screen.saveBMP("/home/kovalchuk/presentation/6.bmp");
@@ -61,8 +72,8 @@ public class FbTestApplication {
 					System.out.println(e);
 				}
 				screen.fillRect(0);
-				//if (image3.blitSurface(screen, new SDLRect(10, 10, 500, 400)) == -1)
-                if (image3.blitSurface(screen, displayableSurface.getStartCoordinates(image3)) == -1)
+				if (image3.blitSurface(screen) == -1)
+                //if (image3.blitSurface(screen, displayableSurface.getStartCoordinates(image3)) == -1)
 					log.warning("Blit did now work");
 
 				screen.flip();
